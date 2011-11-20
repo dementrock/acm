@@ -1,0 +1,82 @@
+POJ 3349
+Use the minimal representation of string. See Zhou Yuan's paper.
+POJ 1308
+Ad-hoc. I recommend against using disjoint-set data structure. Note the empty tree circumstance. I used several conditions: check that number of nodes = numbers of edges + 1; check that it's not a forest; check that root exists; check that there is only one node with degree 0 and all other nodes are with degree 1.
+POJ 2761
+Various methods. Sort intervals according to their left endpoints. As no intervals include another, the left endpoints and right endpoints will both be strictly increasing after the sort. So we add or delete the elements according to each interval and get the kth minimal in the current tree. Note that each element get in or out the tree at most once. Additional for Binary Index Tree or Segment Tree: need discretization of the values. Then run a binary search.
+POJ 2418
+C++ STL Map.
+POJ 3167
+For A[1], ..., A[k] to match B[1], ..., B[k], we need
+A[i] < A[j] whenever B[i] < B[j]
+A[i] = A[j] whenever B[i] = B[j]
+A[i] > A[j] whenever B[i] > B[j]
+If A[1], ..., A[k - 1] already matches B[1], .., B[k - 1], then for A[1~k] to match B[1~k], we only need
+(1) A[i] < A[k] whenever B[i] < B[k]
+(2) A[i] = A[k] whenever B[i] = B[k]
+(3) A[i] > A[k] whenever B[i] > B[k]
+where 1 <= i <= k - 1
+For (2), use the transitivity of equivalence, let i1, i2, ..., k be increasing indeces in A such that A[i1] = A[i2] = ... = A[k], we only need to check that B[i1] = B[k] (or any arbitrary index other than k). Then for instance we have A[i2] = A[k], and we need B[i2] = B[k]. But since i1 <= k - 1, i2 <= k-1, and A[1~k-1] matches B[1~k-1], we have B[k] = B[i1] = B[i2].
+For (1), use the transitivity of '<'. Let i be the index of the maximum among A[1], ..., A[k - 1]. Then we only need to check that B[i] < B[k]. For any other relations, for instance if A[j] < A[k], we need B[j] < B[k]. But A[j] <= A[i], so B[j] < B[i] < B[k].
+For (3) it's similar. Then we can first get all needed indeces and then apply KMP.
+POJ 2054
+If there were no constraint requiring that the father node must be colored first, then we can just sort all Ci. Now this is not the case. Consider the node with the largest weight Ci. If it is not the root, we claim that it must be immediately colored once its father node is colored. Let the father node be p, the node with largest weight be q, and the nodes which are colored between them be n1, n2, ..., nk.
+Let F1 be the cost to color p, q, and then n1, ..., nk, F2 be the cost to color p, n1, ..., nk, q, let T be the starting time when coloring p, then
+F1 = T * Cp + (T + 1) * Cq + sum{(T + i + 1) * Cni}
+F2 = T * Cp + sum{(T + i) * Cni} + (T + k + 1) * Cq
+Then F2 - F1 = k * Cq - sum{Cni} >= 0 since Cq is the largest weight. Therefore coloring q first yileds less total cost.
+Now since the order of coloring p and q is determined, we can consider them as the same node. Now consider another arbitrary list of nodes n1, ..., nk. We need to determine whether to color p, q first and then n1 ~ nk, or to color n1 ~ nk first and then p, q. Let the cost of the first strategy be F1 and that of the second be F2, then
+F1 = T * Cp + (T + 1) * Cq + sum{(T + i + 1) * Cni}
+F2 = sum{(T + i - 1) * Cni} + (T + k) * Cp + (T + k + 1) * Cq
+So F2 - F1 = k * (Cp + Cq) - 2 * sum (Cni)
+So (F2 - F1) / (2k) = (Cp + Cq) / 2 - sum(Cni) / k
+Therefore if we consider p, q as a single node and n1~nk as a single node, with the average as their weights, then we only need to compare this new weight. So we should use the average weight of p and q to be the new weight. Note that the average here should consider how many nodes there actually are inside p and q (since they may be merged from other nodes!).
+POJ 2309
+Draw the tree in 2-base. Then it's easy to find that the left node of x is x - k and the right node of x is x + k, where k = 2^(t-1) where t is the number of consecutive zeroes counting from right.
+POJ 1703
+Same with a previously done Disjoint Set problem.
+POJ 1226
+Find the shortest string and enumerate over all its substrings and check if they suffice.
+POJ 1204
+AC automaton. See:
+http://www.cppblog.com/mythit/archive/2009/04/21/80633.html
+http://hi.baidu.com/lightxianjian/blog/item/d0f0b8de8041125095ee3710.html
+POJ 3233
+Dichotomy twice.
+POJ 2774
+See
+ftp://61.187.92.238:8104/%D7%CA%D4%B4%CF%C2%D4%D8/%B3%CC%D0%F2%C9%E8%BC%C6%D3%EB%CB%E3%B7%A8%C9%E8%BC%C6%D1%A7%CF%B0%D7%CA%C1%CF/2%20%CA%FD%BE%DD%BD%E1%B9%B9/%D7%D6%B7%FB%B4%AE/%BA%F3%D7%BA%CA%FD%D7%E9.pdf
+POJ 2185
+The lcm of lengths of minimal repeating substring of all rows is the width of the minimal repeating matrix. Similar for columns. So now we need to get the minimal repeating substring of a given string. (Notice that when the calculated width or height is greater than the whole rectangular area, pick the latter)
+POJ 2406, 2752
+See
+http://hi.baidu.com/ted11704/blog/item/2c60f5ce01ddce2fe4dd3b73.html
+http://hi.baidu.com/ted11704/blog/item/c5bbfd1cafd083e6c2ce797d.html
+POJ 3450
+Extended KMP
+POJ 3080
+Extended KMP
+POJ 2752
+KMP next[]
+POJ 1961
+KMP next[]
+POJ 2406
+KMP next[]
+POJ 3264
+Segtree / RMQ
+-------Number Theory
+POJ 2551
+calc (a*10+1)%n
+POJ 2115
+Linear congruence
+POJ 2603
+Simple
+POJ 3421
+Multiset Permutation
+POJ 2992
+n! divisors
+POJ 1850
+Simple Combinatorics
+POJ 2363
+Simple
+
