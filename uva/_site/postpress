@@ -1,0 +1,5 @@
+cp $1.cpp /Users/dementrock/coding/dementrock.github.com/source/downloads/code/acm/uva/
+cd /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/
+cp /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/uva/template.markdown /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/uva/$1.markdown
+echo -e "\n[$1](/acmsolutions/uva/$1.html)" >> /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/index.markdown
+vim /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/uva/$1.markdown

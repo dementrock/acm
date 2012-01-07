@@ -1,0 +1,16 @@
+#!/bin/sh
+if test $1 = "c++"
+then
+    cp $2.cpp /Users/dementrock/coding/dementrock.github.com/source/downloads/code/acm/uva/
+    cd /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/
+    cp /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/uva/template.markdown /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/uva/$2.markdown
+    echo "\n[$2](/acmsolutions/uva/$2.html)" >> /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/index.markdown
+    vim /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/uva/$2.markdown
+elif test $1 = "java"
+then
+    cp $2.java /Users/dementrock/coding/dementrock.github.com/source/downloads/code/acm/uva/
+    cd /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/
+    cp /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/uva/template.markdown /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/uva/$2.markdown
+    echo "\n[$2](/acmsolutions/uva/$2.html)" >> /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/index.markdown
+    vim /Users/dementrock/coding/dementrock.github.com/source/acmsolutions/uva/$2.markdown
+fi
