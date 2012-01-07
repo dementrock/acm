@@ -21,6 +21,8 @@ public:
     }
 };
 
+Point origin = Point(0, 0);
+
 int fsig(double x) {
     if (fabs(x) < 1e-6) {
         return 0;
@@ -56,7 +58,7 @@ double dis(double x1, double y1, double x2, double y2) {
 }
 
 double norm(Point a) {
-    return dis(Point(0, 0), a);
+    return dis(origin, a);
 }
 
 double norm(double x, double y) {
@@ -93,47 +95,95 @@ void print_normal(double x, double y) {
     printf("%.3lf %.3lf\n", x/n, y/n);
 }
 
+Point get_tangent (double a, double b, Point center, double r) {
+    double offset_x = center.x, offset_y = center.y;
+    double x1 = b, y1 = - a, x2 = b + b, y2 = - a - a;
+    x1 -= offset_x;
+    y1 -= offset_y;
+    x2 -= offset_x;
+    y2 -= offset_y;
+    double dx = x2 - x1, dy = y2 - y1;
+    double sqr_dr = sqr(dx) + sqr(dy);
+    double D = x1 * y2 - x2 * y1;
+    double x = D * dy / sqr_dr;
+    double y = - D * dx / sqr_dr;
+    x += offset_x;
+    y += offset_y;
+    return Point(x, y);
+}
+
+Point print_point(Point a) {
+    printf("%.3lf %.3lf\n", a.x, a.y);
+}
+
+int equal(Point a, Point b) {
+    return fcmp(a.x, b.x) == 0 && fcmp(a.y, b.y) == 0;
+}
+
+double area_triangle (Point a, Point b, Point c) {
+    return 0.5 * fabs(cross(c.x - a.x, c.y - a.y, c.x - b.x, c.y - b.y));
+}
+
+int point_in_triangle(Point p, Point a, Point b, Point c) {
+    if(equal(a, b) || equal(a, c) || equal(b, c)) {
+        return 0;
+    }
+    return fcmp(area_triangle(a, b, c), area_triangle(p, a, b) + area_triangle(p, b, c) + area_triangle(p, a, c)) == 0;
+}
+
 double calc(double cx, double cy, double r, double hx, double hy) {
     Point center = Point(cx, cy);
     Point house = Point(hx, hy);
-    //double norm_h = norm(house);
-    /* test the distance from origin */
-    /*if (fcmp(norm_h, norm(cx, cy)) <= 0) {
-        return 0;
-    }
 
-    printf("origin passed.\n");*/
+    double norm_h = norm(house);
+    
     /* Calculate the coefficients a, b in the equation ax + by = 0 for the
      * two tangent lines of the circle through origin */
 
     double a1, b1, a2, b2;
-    //if (fcmp(fabs(cy), r) < 0) { // which should not happen
-     //   return 0;
     if (fcmp(fabs(cy), r) == 0) {
         a1 = 0;
         b1 = 1;
         a2 = 2 * cx * cy;
         b2 = sqr(r) - sqr(cx);
+        if (b2 > 0) {
+            a2 = -a2;
+            b2 = -b2;
+        }
+        //cout << a1 << " " << b1 << " " << a2 << " " << b2 << endl;
     } else {
-        a1 = a2 = 1;
-        //cout << cx * cy << endl;
-        //cout << sqr(cy) + sqr(cx) - sqr(r) << endl;
-        //cout << r * safe_sqrt(sqr(cy) + sqr(cx) - sqr(r)) << endl;
+        a1 = 1;
+        a2 = -1;
         b1 = (- cx * cy - r * safe_sqrt(sqr(cy) + sqr(cx) - sqr(r))) / (sqr(cy) - sqr(r));
-        b2 = (- cx * cy + r * safe_sqrt(sqr(cy) + sqr(cx) - sqr(r))) / (sqr(cy) - sqr(r));
-        //printf("%.3lf %.3lf %.3lf %.3lf\n", a1, b1, a2, b2);
+        b2 = -(- cx * cy + r * safe_sqrt(sqr(cy) + sqr(cx) - sqr(r))) / (sqr(cy) - sqr(r));
     }
 
-    //double va1 = a1, vb1 = -b1, va2 = a2, vb2 = -b2;
+    
+    /* Get tangent points */
+
+    Point t1 = get_tangent(a1, b1, center, r);
+    Point t2 = get_tangent(a2, b2, center, r);
+
+    if (point_in_triangle(house, origin, t1, t2)) {
+        return 0;
+    }
+
+    //cout << "Triangle test passed" << endl;
+
+    //print_point(t1);
+    //print_point(t2);
+
     double vx1 = b1, vy1 = -a1, vx2 = b2, vy2 = -a2;
 
     //vx1=-vx1, vy1=-vy1, vx2=-vx2, vy2=-vy2;
 
     //printf("%.3lf %.3lf %.3lf %.3lf\n", a1, b1, a2, b2);
 
-    print_normal(vx1, vy1);
-    print_normal(vx2, vy2);
-    print_normal(hx, hy);
+    //print_normal(vx1, vy1);
+    //print_normal(vx2, vy2);
+    //print_normal(hx, hy);
+
+    
 
     //printf("%.3lf %.3lf\n", cross(vx1,vy1,hx,hy), cross(vx2,vy2,hx,hy));
     
@@ -143,13 +193,13 @@ double calc(double cx, double cy, double r, double hx, double hy) {
         return 0;
     }
 
-    //printf("angle1 passed.\n");
-
     double minx = cx - r, maxx = cx + r, miny = cy - r, maxy = cy + r;
 
-    if (fsig(hx) != fsig(minx) && fsig(hx) != fsig(maxx) || fsig(hy) != fsig(miny) && fsig(hy) != fsig(maxy)) {
+    if (fsig(hx) < fsig(minx) || fsig(hx) > fsig(maxx) || fsig(hy) < fsig(miny) || fsig(hy) > fsig(maxy)) {
         return 0;
     }
+
+    //cout << "Quadrant test passed" << endl;
 
     /*double norm_v1 = norm(vx1, vy1), norm_v2 = norm(vx2, vy2);
     double cosa = dot(vx1, vy1, hx, hy) / (norm_v1 * norm_h);
