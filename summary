@@ -1,0 +1,18 @@
+data structures:
+    heap
+    treap / AVL / SBT
+    interval tree
+    disjoint sets
+    splay tree
+    binary index tree
+    suffix tree
+
+algorithms:
+    dynamic programming
+    graphs:
+        bellman-ford
+        spfa
+        floyd
+        dijkstra
+        maximum flow
+        minimum-cost maximum flow

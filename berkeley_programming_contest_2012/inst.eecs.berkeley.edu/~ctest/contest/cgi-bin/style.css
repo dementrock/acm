@@ -1,0 +1,10 @@
+BODY { width: 600px }
+BODY, TD, TH { font-size: 16px }
+ADDRESS { font-size: 14px }
+A:visited { color:blue }
+.boxed { border-width: 2px; border-style: solid; padding: 10px }
+.tightlyboxed { border-width: 1px; border-style: solid; padding: 1px }
+H1 { font: 20px Arial; font-weight: bold; text-align: center }
+H2 { font: 16px Arial; font-weight: bold; text-align: left }
+SPAN.ERR { color: #dd0000 }
+SPAN.COMMENT { color: #0000dd }

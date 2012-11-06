@@ -1,0 +1,51 @@
+Welcome to TexBin
+=
+
+
+Here you can edit LaTeX and Markdown and share your work easily.
+
+Markdown
+-
+
+The syntax for Markdown is supported naturally. Try a few examples:
+
+
+    __This is bold__
+
+    **So is this**
+
+    _This is italic_
+
+    *So is this*
+
+Use "\\" to escape special characters.
+
+$\LaTeX$
+-
+
+Support for $\LaTeX$ is provided by [MathJax](http://www.mathjax.org/)
+
+Enclose $\LaTeX$ formla with \$\$. For example,
+
+    $x^2+y^2=z^2$
+
+yields $x^2+y^2=z^2$
+
+Here's a rather complicated example:
+
+    $\begin{eqnarray} && x^2 + y^2    \\ &=& z^2 \end{eqnarray}$
+
+yields
+
+$\begin{eqnarray} && x^2 + y^2    \\ &=& z^2 \end{eqnarray}$
+
+Macro is also supported. For instance, type
+
+    $\newcommand{\f}[2]{\frac{#1}{#2}}$
+
+$\newcommand{\f}[2]{\frac{#1}{#2}}$
+Then
+
+    $\f12$
+
+would yield $\f 12$.

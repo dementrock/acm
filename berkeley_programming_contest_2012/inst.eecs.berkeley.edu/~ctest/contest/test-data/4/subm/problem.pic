@@ -1,0 +1,46 @@
+% Problem: editdist
+In an effort to develop a system to check for plagiarism, a client
+asks you to develop a program that measures how different two texts
+are from each other.  Specifically, given two texts (strings) $A$ and
+$B$, he'd like to be able to compute the minimum number of characters
+that need to be added to and/or removed from $A$ to get $B$ (or
+equivalently, the total number of characters that must be added to $A$
+and $B$ to make them equal).  For
+example, if $A$ is ``\verb*|written word|'' and $B$ is
+``\verb*|kitten purred|'' we can first delete 4~characters from $A$ to get
+``\verb*|itten rd|'' and then add 5~new ones to get $B$, for a total of
+9~characters.  Alternatively, we can add 4~characters to $A$ to get
+``\verb*|wrkitten wopurred|'' and add 4~different ones to $B$ to get
+the same thing.
+We'll say that the {\it dissimilarity} of $A$ and $B$
+is~9.
+
+Write a program to compute the dissimilarity of texts of up to~1000
+characters.
+The input consists of pairs of strings, with each string on a single
+line.
+For each pair, print one line containing the dissimilarity between the
+texts.
+
+\paragraph{Example:}~
+
+{\small
+\begin{tabular}{r | r }
+\multicolumn{1}{c|}{Input} & \multicolumn{1}{c}{Output}	 \\
+\hline
+\begin{minipage}[t]{3.25in}
+\begin{verbatim}
+written word
+kitten purred
+sally sells sea shells by the seashore
+sarah sold salt sellers at the salt mines
+\end{verbatim} 
+\end{minipage} &
+\begin{minipage}[t]{1in}
+\begin{verbatim}
+9
+33
+\end{verbatim}
+\end{minipage}
+\end{tabular}
+}

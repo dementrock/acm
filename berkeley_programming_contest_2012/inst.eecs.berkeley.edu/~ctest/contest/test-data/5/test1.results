@@ -1,0 +1,11 @@
+Case 1:
+  Lots with 4 surveyor's lines = 1
+  Lots with 5 surveyor's lines = 4
+  Lots with 6 surveyor's lines = 3
+Total number of lots = 8
+
+Case 2:
+  Lots with 4 surveyor's lines = 1
+  Lots with 6 surveyor's lines = 1
+  Lots with 7 surveyor's lines = 1
+Total number of lots = 3

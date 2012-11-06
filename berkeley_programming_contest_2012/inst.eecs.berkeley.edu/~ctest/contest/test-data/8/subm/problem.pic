@@ -1,0 +1,40 @@
+% Problem: positions
+Given a non-negative integer $N$ as input, print $P(N)$,
+the position of $N$ in the numerically ordered
+sequence of all non-negative integers with
+the same number of 1-bits as $N$ in binary representation, numbering
+from~0.  For
+example, $17=10001_2$ has two 1-bits in its representation.  There are
+6~numbers less than~17 that also have two 1-bits---3, 5, 6, 9, 10, and
+12---so $P(17)=6$.  
+
+Inputs
+will be non-negative decimal numbers less than $2^{63}$, entered
+in free format on the standard input.  The binary representation of
+each number will have~10 or fewer one-bits.
+Thus, all valid inputs will be
+representable using a Java {\tt long} or a G++ {\tt long long int}.
+For each input number, your program must output one line in the format
+shown in the example.
+
+\paragraph{Example:}~
+
+\begin{tabular}{r | r }
+\multicolumn{1}{c|}{Input} & \multicolumn{1}{c}{Output}	 \\
+\hline
+\begin{minipage}[t]{1in}
+\begin{verbatim}
+3 17 7
+8
+\end{verbatim} 
+\end{minipage} &
+\begin{minipage}[t]{4.5in}
+\begin{verbatim}
+3 is number 0 in the sequence of numbers with 2 1-bits.
+17 is number 6 in the sequence of numbers with 2 1-bits.
+7 is number 0 in the sequence of numbers with 3 1-bits.
+8 is number 3 in the sequence of numbers with 1 1-bits.
+\end{verbatim}
+\end{minipage}
+\end{tabular}
+\label{exer:last}

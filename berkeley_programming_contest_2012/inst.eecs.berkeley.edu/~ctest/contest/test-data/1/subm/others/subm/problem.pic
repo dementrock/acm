@@ -1,0 +1,72 @@
+% Problem: distances
+A transportation planner is interested in knowing the maximum distance
+one must travel to get between any two points in a country (that is,
+the maximum of all the shortest distances between pairs of cities) and
+wants you to develop a program to do so.  
+For example, consider this simple road system, where all roads are
+bidirectional:
+
+\medskip
+.PS
+define city { ellipse wid 0.5*$2 ht 0.25 $1 at Here }
+define roadwe { line from $1.e to $2.w "$3" above }
+define roadns { line from $1.s to $2.n "$3~" rjust }
+SF: city("SF", 1)
+move to SF.n + (-0.1, 1); Eu: city("Eureka", 1.3)
+move to SF.e + (0.5, 0.5); Sa: city("Sacramento", 2)
+move to SF.s + (0.4, -2); LA: city("LA", 1)
+move to SF.e + (5, -1); SaF: city("Santa Fe", 2)
+move to LA + (0.4, 1.5); Fr: city("Fresno", 1.2)
+
+
+roadns(Sa, SF, 88)
+roadns(Eu, SF, 271)
+roadns(SF, LA, 381)
+roadwe(SF, SaF, 1146)
+roadwe(LA, SaF, 874)
+roadns(Fr, LA, 219)
+.PE
+\box\graph
+
+\medskip
+\noindent the maximum distance would be that between Eureka and Santa
+Fe: 1417 miles.
+
+The input to your program will consist of one or more sets of data in
+free format.  Each set starts with an integer, $N$, indicating the
+number of road segments between cities.   There then follow two city
+names (containing no embedded blanks) followed by a positive integer distance.
+There is at most one road between any pair of cities and no road from
+a city directly to itself.  There will be
+no more than~100 cities.
+The last set is followed by the integer 0.
+
+For each set, output the maximum distance in the format shown in the
+example.
+
+\paragraph{Example:}~
+
+\medskip
+{\small
+\begin{tabular}{r | r }
+\multicolumn{1}{c|}{Input} & \multicolumn{1}{c}{Output}	 \\
+\hline
+\begin{minipage}[t]{2.75in}
+\begin{verbatim}
+6
+Eureka SF 271  SF Sacramento 88
+Fresno LA 219 Santa_Fe LA 874
+SF Santa_Fe 1146
+SF LA 381
+1 Berkeley Fresno 180
+0
+\end{verbatim} 
+\end{minipage} &
+\begin{minipage}[t]{1in}
+\begin{verbatim}
+Set #1: 1417 miles
+Set #2: 180 miles
+\end{verbatim}
+\end{minipage}
+\end{tabular}
+}

@@ -1,0 +1,93 @@
+% Problem: magnets
+The puzzle game Magnets involves placing a set of domino-shaped
+magnets (or electrets or other polarized objects) in a subset of slots on
+a board so as to satisfy a set of constraints.  For example, the
+puzzle on the left has the solution shown on the
+right\footnote{Source: ``Magnets'' game from Simon Tatham's Portable
+Puzzle Collection.}: 
+
+\bigskip
+\centerline{\includegraphics{diagrams/magnets1.ps}}
+
+\bigskip
+Each slot contains either a blank entry (indicated by `x's), or a
+``magnet'' with a positive and negative end.
+The numbers along the left and top sides show the numbers of `{\tt+}'
+squares in  particular rows or columns.  Those along the right and
+bottom show the number of `{\tt-}' signs in particular rows or columns.
+Rows and columns without a number at one or both ends are
+unconstrained as to the number of `{\tt+}' or `{\tt-}' signs,
+depending on which number is not present.  In addition
+to fulfilling these numerical constraints, a puzzle solution must also
+satisfy the constraint that no two orthogonally touching squares may
+have the same sign (diagonally joined squares are not constrained).  
+
+The input to your program will consist of a series of puzzle
+specifications in free format.
+Each specification will consist of 
+\begin{itemize}
+\item Positive integers $W \le 7$ and $H\le 7$, indicating the width and height
+of the board in squares. At least one will be even.
+\item Two sequences of $W$ integers, indicating the numbers along the
+top ({\tt+}) and bottom ({\tt-}) edges respectively.  Values of $-1$
+indicate missing numbers.
+\item Two sequences of $H$ integers, indicating the numbers along the
+left ({\tt+}) and right ({\tt-}) edges respectively (from top to
+bottom). Values of $-1$
+again indicate missing numbers.
+\item $H$ strings of $W$ characters each, indicating the slots, or
+portions thereof, contained in each of the $H$ rows (from top to
+bottom).  Each string gives one row.  Each character in a string is one of `T',
+`B', `L', or `R'.  A `T' indicates that the square is the top of a
+vertical slot, `B' the bottom of a vertical slot, `L' the left of a
+horizontal slot, and `R' the right of a horizontal slot.
+See the example for the representation of the diagram above.
+\end{itemize}
+The last puzzle specification will be followed by two 0s.
+
+For each puzzle, print out a solution, using the format shown in the
+example below.  Leave one blank line after each printed solution.
+
+\paragraph{Example:}~
+
+{\small
+\begin{tabular}{r | r }
+\multicolumn{1}{c|}{Input} & \multicolumn{1}{c}{Output}	 \\
+\hline
+\begin{minipage}[t]{3in}
+\begin{verbatim}
+6 5
+1 -1 -1 2 1 -1 
+2 -1 -1 2 -1 3
+2 3 -1 -1 -1 
+-1 -1 -1 1 -1 
+LRLRTT
+LRLRBB
+TTTTLR
+BBBBTT
+LRLRBB
+3 4
+2 -1 -1     -1 -1 2
+-1 -1 2 -1   0 -1 -1 -1
+TTT BBB TLR BLR
+0 0 
+\end{verbatim} 
+\end{minipage} &
+\begin{minipage}[t]{1in}
+\begin{verbatim}
+Set 1:
+   +-+-x-
+   -+-+x+
+   xx+-+-
+   xx-+x+
+   -+xxx-
+
+Set 2:
+   +x+
+   -x-
+   +-+
+   -+-
+\end{verbatim}
+\end{minipage}
+\end{tabular}
+}

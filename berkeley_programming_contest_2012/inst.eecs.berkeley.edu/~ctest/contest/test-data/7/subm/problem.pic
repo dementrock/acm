@@ -1,0 +1,57 @@
+% Problem: walk
+Consider a kind of {\it random walk\/} consisting of a sequence of
+integer values starting at 0 in
+which each value differs from its predecessor randomly by $-1$, 0,
+or~1.  For example: $0, 1, 1, 2, 2, 3, 3, 3, 2, 1, 0, -1$.
+To describe such a sequence, we could list it in this fashion or give
+some kind of compressed description.  This problem involves a
+particular compression scheme.
+
+The notation has the following terms:
+\begin{enumerate}
+\item The symbol `+' indicates a step in which the value increases
+by 1.
+\item The symbol `-' indicates a step in which the value decreases
+by 1.
+\item The symbol `.' indicates a step in which the value does not
+change.
+\item Any sequence of terms may be enclosed in parentheses,
+      which serve to group them into a single term
+      without changing their meaning.
+\item Any of the preceding terms may be followed by a positive integer
+      numeral, $N$, denoting $N$ repetitions of that term.  
+\end{enumerate}
+For example, the sample sequence in the first paragraph may be
+written as ``{\tt (+.)3.-4}'' because after the (implicit) initial 0,
+the sequence increases by~1 and then increases by~0 three times, then
+increases by 0 once, and then decreases by~1 four times.  
+
+Write a program to read such descriptions and print out the average
+value of the denoted sequence to two decimal places.  For example, the
+average value of the sample sequence should be reported as  $1.42$.
+The input will consist of descriptions with the syntax described above in free
+format. The descriptions contain no whitespace.  Echo each
+description, followed by the average value of the sequence it describes
+in the format illustrated in the example below.
+
+\paragraph{Example:}~
+
+{\small
+\begin{tabular}{r | r }
+\multicolumn{1}{c|}{Input} & \multicolumn{1}{c}{Output}	 \\
+\hline
+\begin{minipage}[t]{2in}
+\begin{verbatim}
+(+.)3.-4  (((++--)+)3-3)2
+(+-)
+\end{verbatim} 
+\end{minipage} &
+\begin{minipage}[t]{3in}
+\begin{verbatim}
+Average value of (+.)3.-4 is 1.42
+Average value of (((++--)+)3-3)2 is 1.78
+Average value of (+-) is 0.33
+\end{verbatim}
+\end{minipage}
+\end{tabular}
+}
